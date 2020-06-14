@@ -1,0 +1,124 @@
+.newGame {
+	display: none;
+}
+.left-column {
+  height: 450px;
+  overflow-y: scroll;
+  padding: 5px;
+  display: flex;
+  flex-flow: column;
+}
+.left-column::-webkit-scrollbar {
+	width: 3px; 
+}
+.left-column::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 5px grey;
+	border-radius: 10px;
+}
+.left-column::-webkit-scrollbar-thumb {
+	background: black;
+}
+.left-column::-webkit-scrollbar-thumb:hover {
+	background: #36383a; 
+}
+.btn-newgame {
+	margin: 20px 0 20px -10px;
+}
+.box {
+	margin-bottom: 10px;
+	-webkit-box-shadow: 0px 3px 7px -2px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 3px 7px -2px rgba(0,0,0,0.75);
+	box-shadow: 0px 3px 7px -2px rgba(0,0,0,0.75);	
+}
+.completeGame {
+	border-top-right-radius: 3px;
+	border-top-left-radius: 3px;
+	border: 1px solid black;		
+}
+.resultBox {
+	margin: 20px 0 0 0;
+}
+.resultBox h4 {
+	font-size: 18px;
+}
+.featureBox {
+	text-align: center;
+	margin-bottom: 10px;
+	padding: 5px 0 0 0;
+}
+.featureBox .gameDate {
+	font-size: 12px;
+}
+.featureBox .attempt h4 {
+	font-size: 24px;
+	margin: 0;
+}
+.featureBox .attempt span {
+	font-size: 14px;
+}
+.linkToGame {
+	background: rgba(160, 227, 84, 0.9);
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+	padding: 5px;
+	cursor: pointer;
+	text-align: center;
+}
+.main-column {
+	padding-top: 80px; 
+}
+.main-column h3 {
+	font-size: 20px;
+	margin: 0 0 40px 0;
+}
+input[type=text] {
+	width: 30px;
+	margin: 15px 0 15px 0;
+	padding: 0 0 0 15px;
+	font-size: 24px;
+	border: none;
+	text-align: center;
+}
+.plus {
+	border: 1px solid green;
+	border-radius: 50px;
+	padding: 8px 16px 10px 16px;
+	cursor: pointer;
+	font-size:24px;
+	font-weight: bold;
+}
+.minus {
+	border: 1px solid red;
+	border-radius: 50px;
+	padding: 8px 18px 8px 18px;
+	cursor: pointer;
+	font-size:24px;
+	font-weight: bold;
+}
+.btn-check {
+	margin: 40px 0 30px 0;
+	width: 100%;
+}
+.results {
+	text-align: right;
+	font-size: 24px;
+}
+.right-column {
+	text-align: center;
+	padding-top: 80px; 
+}
+.right-column h3 {
+	font-size: 20px;
+	margin: 0 0 20px 0;		
+}
+.attemptBox {
+	margin: 0 0 10px 0;
+	padding: 10px 0 10px 0;
+	border-bottom: 1px solid black;
+	-webkit-box-shadow: 0px 3px 10px -2px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 3px 10px -2px rgba(0,0,0,0.75);
+	box-shadow: 0px 3px 10px -2px rgba(0,0,0,0.75);
+}
+.right-column h4 {
+	font-size: 18px;
+}
