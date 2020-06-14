@@ -1,0 +1,4 @@
+tbody tr:hover {
+	background-color: rgba(47, 47, 47, 0.5);
+	padding: 5px;
+}

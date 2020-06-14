@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -44,9 +45,10 @@ public class AppController {
 		history.removeTrade(id);
 	}
 	
-	@RequestMapping(value = "/update/{id}")
-	public void updateTrade(@PathVariable("id") long id, @RequestParam("open") Double openPrice, @RequestParam("close") Double closePrice, @RequestParam("numTrades") String numTrades, @RequestParam("tradeDate") String tradeDate) {
-		history.updateTrade(tradeDate, openPrice, closePrice, numTrades, id);
+	@RequestMapping(value = "/update/{id}", consumes = "application/json")
+	public void updateTrade(@PathVariable("id") long id, @RequestBody TradeString trade) {
+		history.updateEmitent(trade.getSecName(), trade.getEmitentTitle(), trade.getRegNumber(), trade.getSecId());
+		history.updateTrade(trade.getTradeDate(), trade.getOpenPrice(), trade.getClosePrice(), trade.getNumTrades(), trade.getTradeId());
 	}	
 	
 	@RequestMapping(value = "/uploadXML", produces = "application/json", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)

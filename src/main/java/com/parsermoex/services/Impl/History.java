@@ -22,8 +22,13 @@ public class History implements IService {
 	}
 
 	@Override
-	public void updateTrade(String tradeDate, Double openPrice, Double closePrice, String numTrades, long id) {
+	public void updateTrade(String tradeDate, Double openPrice, Double closePrice, Double numTrades, long id) {
 		tradeRepository.updateTrade(tradeDate, openPrice, closePrice, numTrades, id);
+	}
+	
+	@Override
+	public void updateEmitent(String secName, String emitentTitle, String regNumber, String secId) {
+		tradeRepository.updateEmitent(secName, emitentTitle, regNumber, secId);
 	}
 	
 	@Override

@@ -36,7 +36,7 @@ public class TradeRepository {
 		return query.getResultList();
 	}
 
-	public void updateTrade(String tradeDate, Double openPrice, Double closePrice, String numTrades, long id) {
+	public void updateTrade(String tradeDate, Double openPrice, Double closePrice, Double numTrades, long id) {
 		String q = "UPDATE Trade t SET t.trade_date = ?1, t.open_price = ?2, t.close_price = ?3, t.num_trades = ?4 WHERE t.trade_id = ?5";
 		entityManager.createNativeQuery(q)
 				.setParameter(1, tradeDate)
@@ -44,6 +44,16 @@ public class TradeRepository {
 				.setParameter(3, closePrice)
 				.setParameter(4, numTrades)
 				.setParameter(5, id)
+				.executeUpdate();
+	}
+	
+	public void updateEmitent(String secName, String emitentTitle, String regNumber, String secId) {
+		String q = "UPDATE Emitent e SET e.sec_name = ?1, e.emitent_title = ?2, e.reg_number = ?3 WHERE e.sec_id = ?4";
+		entityManager.createNativeQuery(q)
+				.setParameter(1, secName)
+				.setParameter(2, emitentTitle)
+				.setParameter(3, regNumber)
+				.setParameter(4, secId)
 				.executeUpdate();
 	}
 
