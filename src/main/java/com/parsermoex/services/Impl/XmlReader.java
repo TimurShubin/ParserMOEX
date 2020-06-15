@@ -2,15 +2,16 @@ package com.parsermoex.services.Impl;
 
 import java.io.InputStream;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
 import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.parsermoex.App;
 import com.parsermoex.entities.Emitent;
 import com.parsermoex.entities.Trade;
 import com.parsermoex.repositories.EmitentRepository;
@@ -21,7 +22,6 @@ public class XmlReader {
 
 	private final TradeRepository tradeRepository;
 	private final EmitentRepository emitentRepository;
-	private DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 	
 	public XmlReader(TradeRepository tradeRepository, EmitentRepository emitentRepository) {
 		this.tradeRepository = tradeRepository;
@@ -58,7 +58,7 @@ public class XmlReader {
 		return stocks;
 	}
 	
-	public Set<Emitent> getXmlEmitent(InputStream file) {
+	public CompletableFuture<Set<Emitent>> getXmlEmitent(InputStream file) {
 
 		Set<Emitent> stocks = new HashSet<>();
 		try {
@@ -76,27 +76,39 @@ public class XmlReader {
 					String emitentTitle = elem.getAttribute("emitent_title");
 					String regNumber = elem.getAttribute("regnumber");
 
+					long sResp = System.nanoTime();
+					
 					Emitent s = new Emitent(secId, secName, emitentTitle, regNumber);
 					emitentRepository.save(s);
 					stocks.add(s);
+					
+					long eResp = System.nanoTime() - sResp;
+					System.out.println("Время записи данных : " + eResp/1000000.0 + "мс");
+					
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
-		return stocks;
+		return CompletableFuture.completedFuture(stocks);
 	}
 	
 	private Document normalizeDoc(InputStream file) {
 		DocumentBuilder dBuilder;
 		Document doc = null;
 		try {
-			dBuilder = dbFactory.newDocumentBuilder();
+			long sResp = System.nanoTime();
+			
+			dBuilder = App.dbFactory.newDocumentBuilder();
 			doc = dBuilder.parse(file);
+			doc.getDocumentElement().normalize();
+			
+			long eResp = System.nanoTime() - sResp;
+			System.out.println("Время парсинга файла : " + eResp/1000000.0 + "мс");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		doc.getDocumentElement().normalize();
 		
 		return doc;
 	}
